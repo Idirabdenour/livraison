@@ -1,0 +1,56 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app >
+  <display-name>Archetype Created Web Application</display-name>
+   <servlet>
+    <servlet-name>principale</servlet-name>
+    <servlet-class>Livraison.controller.principale</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ArticleController</servlet-name>
+    <servlet-class>Livraison.controller.ArticleController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Facture_Controller</servlet-name>
+    <servlet-class>Livraison.controller.Facture_Controller</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Client_Controller</servlet-name>
+    <servlet-class>Livraison.controller.Client_Controller</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Add_FacC</servlet-name>
+    <servlet-class>Livraison.controller.Add_FacC</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Facture_Client_Controller</servlet-name>
+    <servlet-class>Livraison.controller.Facture_Client_Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>principale</servlet-name>
+    <url-pattern>/princ</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ArticleController</servlet-name>
+    <url-pattern>/article</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Facture_Controller</servlet-name>
+    <url-pattern>/facture</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Client_Controller</servlet-name>
+    <url-pattern>/client</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Facture_Client_Controller</servlet-name>
+    <url-pattern>/factureclient</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>Add_FacC</servlet-name>
+    <url-pattern>/ajoutFact</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
