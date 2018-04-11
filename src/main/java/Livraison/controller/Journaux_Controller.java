@@ -28,7 +28,7 @@ public class Journaux_Controller extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 	JournauxDAO Jdao=JournauxDAO.getInstance();
-	livreurDAO Fdao=livreurDAO.getInstance();
+	livreurDAO Ldao=livreurDAO.getInstance();
 		
 		String action=request.getParameter("action");
 		String idStr=request.getParameter("id");
