@@ -12,16 +12,16 @@
 <head>
 <link rel="stylesheet" href="style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Liste des factures</title>
+<title>Liste des livreurs</title>
 </head>
 
 <body>
 <div class="container-fluid">
 <center>
-<h1><c:out value="Liste des Factures" /></h1>
+<h1><c:out value="Liste des livreurs" /></h1>
 
 	<%
-		facture facture=(facture)request.getAttribute("facture");
+	livreur livreur=(livreur)request.getAttribute("livreur");
 		
 	%>
 
@@ -32,22 +32,21 @@
 		<TH>Date</TH><TH>Article</TH><TH>Id Client</TH><TH>Nom Client</TH><TH>Prénom Client</TH>
 	</TR>
 	<%
-	ArrayList<facture> factures=(ArrayList<facture>) request.getAttribute("factures");
+	ArrayList<livreur> livreurs=(ArrayList<livreur>) request.getAttribute("livreurs");
 	
-	ArticleDao Adao=ArticleDao.getInstance();
-	ClientDAO Cdao=ClientDAO.getInstance();
+	livreurDAO Ldao=livreurDAO.getInstance();
+	JournauxDAO Jdao=JournauxDAO.getInstance();
 	
 	
-	for(int i=0;i<factures.size();i++){
-		facture = factures.get(i);
+	for(int i=0;i<livreurs.size();i++){
+		livreur = livreurs.get(i);
 		%>
 		<TR>
 		
-		<TD><%= facture.getdate() %></TD>
-		<TD><%= Adao.findById(facture.getID_Article()).getNom_Article() %></TD>
-		<TD><%= facture.getID_Client() %> </TD>
-		<TD><%= Cdao.findById(facture.getID_Client()).getNom() %> </TD>
-		<TD><%= Cdao.findById(facture.getID_Client()).getPrenom() %> </TD>
+		<TD><%= livreur.getparcours() %></TD>
+		<TD><%= livreur.getID_Liv() %> </TD>
+		<TD><%= Jdao.findById(livreur.getID_Liv()).getTitre() %> </TD>
+		<TD><%= Jdao.findById(livreur.getID_Liv()).getPrix() %> </TD>
 	
 	</TR>
 					
@@ -55,7 +54,7 @@
 	}
 %>
 </TABLE>
-<a href="http://localhost:8080/Servlet_DAO_Magasin/princ" class="button">Retour</a>
+<a href="http://localhost:8080/livraison/princ" class="button">Retour</a>
 </ul>
 </center>
 </div>

@@ -33,24 +33,24 @@ public class Journaux_Controller extends HttpServlet {
 		String action=request.getParameter("action");
 		String idStr=request.getParameter("id");
 		journaux journal =null;
-		ArrayList<livreur> facture = null;
+		journaux journaux = null;
 		
 		 if ("select".equals(action)) {
 			if (idStr != null) {
 				int id= Integer.parseInt(idStr);
 				journal=Jdao.findById(id);
-				request.setAttribute("client", journal);
-				facture=Fdao.findByIdF_IdC(id);
-				System.out.println("effffffffffffff"+facture);
-				request.setAttribute("facture", facture);
+				request.setAttribute("journal", journal);
+				journaux=Jdao.findById(id);
+				System.out.println("effffffffffffff"+journaux);
+				request.setAttribute("journaux", journaux);
 			}
 		}
 		 
 		
-		ArrayList<journaux> journaux=Jdao.getAlljournaux();
-		request.setAttribute("clients", journaux);
+		ArrayList<journaux> journau=Jdao.getAlljournaux();
+		request.setAttribute("journaux", journau);
 		
-		String nextJSP = "/clientList.jsp";
+		String nextJSP = "/journauxList.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 		dispatcher.forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -84,7 +84,7 @@ public class Journaux_Controller extends HttpServlet {
 			if (idStr!=null) {
 				
 				request.setAttribute("id", idStr);
-				RequestDispatcher rd = request.getRequestDispatcher("/Facture_Client_Controller");
+				RequestDispatcher rd = request.getRequestDispatcher("/livreur_journaux_Controller");
 				rd.forward(request, response);
 			
 			}

@@ -10,53 +10,47 @@
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
-<title>Articles en stock</title>
+<title>Dépositaires</title>
 </head>
 
 <body>
 <div>
 <center>
-<h1><c:out value="Liste des Articles" /></h1>
+<h1><c:out value="Liste des Dépositaires" /></h1>
 </center>	
 	<%
-		article article=(article)request.getAttribute("article");
-		String Nom_Article=null;
-		String Categorie=null;
-		String prix=null;
-		String Quatite=null;
-		int ID_Article=-1;
+	depositaire depositaire=(depositaire)request.getAttribute("depositaire");
+		String Nom=null;
+		String adresse=null;
+		int ID_Dep=-1;
 		
-		if(article != null){
-			Nom_Article=article.getNom_Article();
-			Categorie=article.getCategorie();
-			prix=article.getprix();
-			Quatite=article.getQuantite();
-			ID_Article=article.getID_Article();
+		if(depositaire != null){
+			Nom=depositaire.getNom();
+			adresse=depositaire.getadresse();
+			ID_Dep=depositaire.getID_Dep();
 		}
 	%>
 
-<h3><c:out value="Articles en stock :" /></h3>
+<h3><c:out value="Dépositaires :" /></h3>
 
 <ul>
 
 <TABLE BORDER>
 	<TR>
-		<TH>id</TH><TH>Nom</TH><TH>Categorie</TH><TH>Prix</TH><TH>Quantité</TH> 
+		<TH>id</TH><TH>Nom</TH><TH>adresse</TH> 
 	</TR>
 <%
-	ArrayList<article> articles=(ArrayList<article>) request.getAttribute("articles");
+	ArrayList<depositaire> depositaires=(ArrayList<depositaire>) request.getAttribute("depositaires");
 		
-	for(int i=0;i<articles.size();i++){
-		 article = articles.get(i);
+	for(int i=0;i<depositaires.size();i++){
+		depositaire = depositaires.get(i);
 		%>
 	<TR>
-		<TD><%= article.getID_Article() %></TD>
-		<TD><%= article.getNom_Article() %></TD>
-		<TD><%= article.getCategorie() %></TD>
-		<TD><%= article.getprix() %> </TD>
-		<TD><%= article.getQuantite() %></TD>
-		<TD><a href="ArticleController?action=delete&id=<%=article.getID_Article() %>">Delete</a></TD>
-		<TD><a href="ArticleController?action=select&id=<%=article.getID_Article() %>">Select</a></TD>
+		<TD><%= depositaire.getID_Dep() %></TD>
+		<TD><%= depositaire.getNom() %></TD>
+		<TD><%= depositaire.getadresse() %></TD>
+		<TD><a href="ArticleController?action=delete&id=<%=depositaire.getID_Dep() %>">Delete</a></TD>
+		<TD><a href="ArticleController?action=select&id=<%=depositaire.getID_Dep() %>">Select</a></TD>
 	</TR>
 		
 		<%
@@ -65,42 +59,30 @@
 </TABLE>
 </ul>
 <h3><c:out value="Modifier :" /></h3>
-	<form action="ArticleController" method="POST">
+	<form action="Depositaire_Controller" method="POST">
 		 
 		<input 
 			class="form-control"
-			name="ID_Article" 
-			value="<%=ID_Article %>"
+			name="ID_Dep" 
+			value="<%=ID_Dep %>"
 			type="hidden">
 		<p>Nom :</p>
 		<input
 			class="form-control" 
-			name="Nom_Article" 
-			value="<%=Nom_Article %>"
-			placeholder="Nom Article">
-		<p>Categorie :</p>
+			name="Nom" 
+			value="<%=Nom %>"
+			placeholder="Nom">
+		<p>adresse :</p>
 		<input
 			class="form-control" 
-			name="Categorie" 
-			value="<%=Categorie %>"
-			placeholder="Categorie">
-		<p>Prix :</p>
-		<input
-			class="form-control" 
-			name="prix" 
-			value="<%=prix %>"
-			placeholder="prix">
-		<p>Quantité :</p>
-		<input 
-			class="form-control"
-			name="Quantite"
-			value="<%=Quatite %>"
-			placeholder="Quantité">
-		<br/> <br/>
-		<button class="btn btn-block btn-primary" type="submit" name="action" value="create">Creer un article</button>
-		<button class="btn btn-block btn-primary" type="submit" name="action" value="update">Modifier l'article</button>
+			name="adresse" 
+			value="<%=adresse %>"
+			placeholder="adresse">
+		
+		<button class="btn btn-block btn-primary" type="submit" name="action" value="create">Creer un dépositaire</button>
+		<button class="btn btn-block btn-primary" type="submit" name="action" value="update">Modifier le dépositaire</button>
 		<center>
-		<a href="http://localhost:8080/Servlet_DAO_Magasin/princ" class="button">Retour</a>
+		<a href="http://localhost:8080/livraison/princ" class="button">Retour</a>
 		</center>
 	</form>
 

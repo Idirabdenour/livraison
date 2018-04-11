@@ -18,48 +18,48 @@
 <body>
 <div class="container-fluid">
 <center>
-<h1><c:out value="Facture du clients" /></h1>
+<h1><c:out value="Journaux du livreur" /></h1>
 
 
 		<%
-		facture factureoo=(facture)request.getAttribute("facture");
+		livreur livreuroo=(livreur)request.getAttribute("livreur");
 		
 		//facture f=new facture();
-		Date date=null;
-		int ID_Article=0;
-		int ID_Client=0;
-		int ID_facture=-1;
-		facture facture=null;
+		String parcours=null;
+		int ID_Dep=0;
+		int Code=0;
+		int ID_Liv=-1;
+		livreur livreur=null;
 		
-		if(factureoo != null){
-			date=factureoo.getdate();
-			ID_Article=factureoo.getID_Article();
-			ID_Client=factureoo.getID_Client();
-			ID_facture=factureoo.getID_facture();
+		if(livreuroo != null){
+			parcours=livreuroo.getparcours();
+			ID_Dep=livreuroo.getID_Dep();
+			Code=livreuroo.getCode();
+			ID_Liv=livreuroo.getID_Liv();
 		}
 		%>
 	</br></br>
 	<TABLE BORDER>
 	<TR>
-		<TH>Date</TH><TH>Numéro d'article</TH><TH>Id Client</TH><TH>Nom Client</TH><TH>Prénom Client</TH>
+		<TH>parcours</TH><TH>Nom Dep</TH><TH>Code J</TH>
 	</TR>
 	<%
-	ArrayList<facture> factures=(ArrayList<facture>) request.getAttribute("factures");
+	ArrayList<livreur> livreurs=(ArrayList<livreur>) request.getAttribute("livreurs");
 
-	ArticleDao Adao=ArticleDao.getInstance();
-	ClientDAO Cdao=ClientDAO.getInstance();
+	livreurDAO Ldao=livreurDAO.getInstance();
+	JournauxDAO Jdao=JournauxDAO.getInstance();
 	
 	
-	for(int i=0;i<factures.size();i++){
-		facture = factures.get(i);
+	for(int i=0;i<livreurs.size();i++){
+		livreur = livreurs.get(i);
 		%>
 	<TR>
 		
-		<TD><%= facture.getdate() %></TD>
-		<TD><%= Adao.findById(facture.getID_Article()).getNom_Article() %></TD>
-		<TD><%= facture.getID_Client() %> </TD>
-		<TD><%= Cdao.findById(facture.getID_Client()).getNom() %> </TD>
-		<TD><%= Cdao.findById(facture.getID_Client()).getPrenom() %> </TD>
+		<TD><%= livreur.getparcours() %></TD>
+		<TD><%= Ldao.findByIdL_Code(livreur.getID_Liv()) %></TD>
+		<TD><%= livreur.getCode() %> </TD>
+		<TD><%= Jdao.findById(livreur.getID_Dep()).getTitre() %> </TD>
+		<TD><%= Jdao.findById(livreur.getID_Dep()).getPrix() %> </TD>
 	
 	</TR>
 					
@@ -71,7 +71,7 @@
 
 
 
-<a href="http://localhost:8080/Servlet_DAO_Magasin/client" class="button">Retour</a>
+<a href="http://localhost:8080/livraison/client" class="button">Retour</a>
 </ul>
 </center>
 </div>

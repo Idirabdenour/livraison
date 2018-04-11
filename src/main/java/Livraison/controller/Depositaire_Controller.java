@@ -3,10 +3,17 @@ package Livraison.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import Livraison.DAO.DepositaireDao;
 import Livraison.model.depositaire;
 
-@WebServlet("/ArticleController")
+@WebServlet("/Depositaire_Controller")
 public class Depositaire_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -16,29 +23,29 @@ public class Depositaire_Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		DepositaireDao Adao=DepositaireDao.getInstance();
+		DepositaireDao Ddao=DepositaireDao.getInstance();
 		
 		String action=request.getParameter("action");
 		String idStr=request.getParameter("id");
-		depositaire article =null;
+		depositaire depositaire =null;
 		
 		if ("delete".equals(action)) {
 			if (idStr != null) {
 				int id= Integer.parseInt(idStr);
-				Adao.deleteArticle(id);
+				Ddao.deleteDepositaire(id);
 			}
 		}else if ("select".equals(action)) {
 			if (idStr != null) {
 				int id= Integer.parseInt(idStr);
-				article=Adao.findById(id);
+				depositaire=Ddao.findById(id);
 				
-				request.setAttribute("article", article);
+				request.setAttribute("depositaire", depositaire);
 			}
 		}
 		
 		
-		ArrayList<depositaire> articles=Adao.getAllarticle();
-		request.setAttribute("articles", articles);
+		ArrayList<depositaire> depositaires=Ddao.getAlldépositaires();
+		request.setAttribute("depositaires", depositaires);
 		
 		String nextJSP = "/ArticleList.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -50,25 +57,23 @@ public class Depositaire_Controller extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DepositaireDao Adao=DepositaireDao.getInstance();
+		DepositaireDao Ddao=DepositaireDao.getInstance();
 		
-		String Nom_Article= request.getParameter("Nom_Article");
-		String Categorie= request.getParameter("Categorie");
-		String prix= request.getParameter("prix");
-		String Quantite= request.getParameter("Quantite");
-		String idStr = request.getParameter("ID_Article");
+		String Nom= request.getParameter("Nom");
+		String adresse= request.getParameter("adresse");
+		String idStr = request.getParameter("ID_Dep");
 		String action =request.getParameter("action");
-		depositaire article=null;
+		depositaire depositaire=null;
 		
 		if ("update".equals(action)) {
 			if (idStr!=null) {
-				int ID_Article=Integer.parseInt(idStr);
-				article=new depositaire(ID_Article, Nom_Article, Categorie, prix, Quantite);
-				Adao.updateArticle(ID_Article,article);
+				int ID_Dep=Integer.parseInt(idStr);
+				depositaire=new depositaire(ID_Dep, Nom, adresse);
+				Ddao.updateDépositaire(ID_Dep,depositaire);
 			}
 		}else {
-				article=new depositaire(-1, Nom_Article, Categorie,prix, Quantite);
-				Adao.CreateArticle(article);
+			depositaire=new depositaire(-1, Nom, adresse);
+				Ddao.CreateDepositaire(depositaire);
 		}
 		
 		doGet(request, response);

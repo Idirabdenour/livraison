@@ -20,7 +20,7 @@ import Livraison.model.depositaire;
 import Livraison.model.journaux;
 import Livraison.model.livreur;
 
-@WebServlet("/Facture_Client_Controller")
+@WebServlet("/livreur_journaux_Controller")
 public class livreur_journaux_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,11 +34,11 @@ public class livreur_journaux_Controller extends HttpServlet {
 		livreurDAO Fdao=livreurDAO.getInstance();
 		String s= (String) request.getAttribute("id");
 		int i=Integer.parseInt(s);
-		ArrayList<livreur> factures=Fdao.findByIdF_IdC(i);
-		request.setAttribute("factures", factures);
+		ArrayList<livreur> livreurs=Fdao.findByIdL_Code(i);
+		request.setAttribute("livreurs", livreurs);
 	
 		
-		String nextJSP = "/factureclient.jsp";
+		String nextJSP = "/livreurJournaux.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 		dispatcher.forward(request, response);
 		

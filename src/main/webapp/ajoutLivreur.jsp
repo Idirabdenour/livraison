@@ -18,55 +18,49 @@
 <body>
 <div class="container-fluid">
 <center>
-<h1><c:out value="Ajouter une facture" /></h1>
+<h1><c:out value="Ajouter un livreur" /></h1>
 
 
 		<%
-		String idclient=(String)request.getAttribute("id");
-		ArticleDao Adao=ArticleDao.getInstance();
+		String code=(String)request.getAttribute("id");
+		JournauxDAO Jdao=JournauxDAO.getInstance();
 		
-		//facture f=new facture();
-		Date date=null;
-		int ID_Article=0;
-		int ID_Client=0;
-		int ID_facture=-1;
-		facture facture=null;
 		
-	/*	if(factureoo != null){
-			date=factureoo.getdate();
-			ID_Article=factureoo.getID_Article();
-			ID_Client=factureoo.getID_Client();
-			ID_facture=factureoo.getID_facture();
-		}*/
+		String parcours=null;
+		int ID_Dep=0;
+		int Code=0;
+		int ID_Liv=-1;
+		journaux journal=null;
+		
 		%>
 	</br></br>
 	
 </br></br>
 
-<form action="Add_FacC" method="POST">
+<form action="Add_Liv_Jour" method="POST">
 		 
 		<input 
-			name="ID_facture" 
-			value="<%=ID_facture %>"
+			name="ID_Liv" 
+			value="<%=ID_Liv %>"
 			type="hidden">
-		<p>Date :</p>
+		<p>parcours :</p>
 		<input
-			type="date"
-			name="date" 
-			value="<%=date %>"
-			placeholder="date">
-		<p>ID_Article :</p>
-		<input
-			
-			name="ID_Article" 
-			value="<%=ID_Article %>"
-			placeholder="ID_Article">
-		<p>ID_Client :</p>
+			type="parcours"
+			name="parcours" 
+			value="<%=parcours %>"
+			placeholder="parcours">
+		<p>ID_Dep :</p>
 		<input
 			
-			name="ID_Client" 
-			value="<%=idclient %>"
-			placeholder="ID_Client"
+			name="ID_Dep" 
+			value="<%=ID_Dep %>"
+			placeholder="ID_Dep">
+		<p>ID_Liv :</p>
+		<input
+			
+			name="Code" 
+			value="<%=code %>"
+			placeholder="Code"
 			class="field left" readonly
 			>
 		

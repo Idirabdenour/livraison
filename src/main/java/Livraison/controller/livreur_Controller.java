@@ -15,7 +15,7 @@ import Livraison.DAO.livreurDAO;
 import Livraison.model.depositaire;
 import Livraison.model.livreur;
 
-@WebServlet("/Facture_Controller")
+@WebServlet("/livreur_Controller")
 public class livreur_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,12 +26,12 @@ public class livreur_Controller extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		livreurDAO Fdao=livreurDAO.getInstance();
-		ArrayList<livreur> factures=Fdao.getAllfacture();
-		request.setAttribute("factures", factures);
+		livreurDAO Ldao=livreurDAO.getInstance();
+		ArrayList<livreur> livreurs=Ldao.getAllLivreurs();
+		request.setAttribute("livreurs", livreurs);
 		
 		
-		String nextJSP = "/FactureList.jsp";
+		String nextJSP = "/livreurList.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 		dispatcher.forward(request, response);
 		//response.getWriter().append("Served at: ").append(request.getContextPath());

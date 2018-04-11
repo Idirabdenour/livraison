@@ -21,7 +21,7 @@
 <body>
 <div>
 <center>
-<h1><c:out value="Choisir un client" /></h1>
+<h1><c:out value="Choisir un journal" /></h1>
 </center>
 
 	<%
@@ -44,7 +44,7 @@
 	
 <%
 	ArrayList<journaux> journaux=(ArrayList<journaux>) request.getAttribute("journaux");
-	ArrayList<facture> factures=(ArrayList<facture>) request.getAttribute("factures");
+	ArrayList<livreur> livreurs=(ArrayList<livreur>) request.getAttribute("livreurs");
 	
 	
 	%>
@@ -75,7 +75,7 @@
 </br></br>
 <h3><c:out value="Modifier le journal" /></h3>
 
-<form action="Client_Controller" method="POST">
+<form action="Journaux_Controller" method="POST">
 		
 		<input 
 			name="Code" 
@@ -98,8 +98,8 @@
 			placeholder="Categorie">
 		<br/><br/>
 		<button  type="submit" name="action" value="update">Modifier le journal </button>
-		<button  type="submit" name="action" value="facture">voir ses factures</button>
-		<button  type="submit" name="action" value="ajout">Ajout d'une facture</button>
+		<button  type="submit" name="action" value="facture">voir ses livreurs</button>
+		<button  type="submit" name="action" value="ajout">Ajout un journal</button>
 </form>
 </center>	
 	<br/><br/>
@@ -107,7 +107,7 @@
 		
 	
 	<center>
-		<a href="http://localhost:8080/Servlet_DAO_Magasin/princ" class="button">Retour</a>
+		<a href="http://localhost:8080/livraison/princ" class="button">Retour</a>
 	</center>
 </div>
 </body>
