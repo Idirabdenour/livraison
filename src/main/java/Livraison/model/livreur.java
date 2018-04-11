@@ -4,60 +4,60 @@ import java.sql.Date;
 
 public class livreur {
 
-	private int ID_facture;
-	private Date date;
-	private int ID_Article;
-	private int ID_Client;
+	private int ID_Liv;
+	private String parcours;
+	private int ID_Dep;
+	private int Code;
 	
 	
 	
-	public livreur(int ID_facture, Date date, int ID_Article, int ID_Client) {
+	public livreur(int ID_Liv, String parcours, int ID_Dep, int Code) {
 		super();
-		this.ID_facture = ID_facture;
-		this.date = date;
-		this.ID_Article = ID_Article;
-		this.ID_Client = ID_Client;
+		this.ID_Liv = ID_Liv;
+		this.parcours = parcours;
+		this.ID_Dep = ID_Dep;
+		this.Code = Code;
 	}
 
-	public int getID_facture() {
-		return ID_facture;
+	public int getID_Liv() {
+		return ID_Liv;
 	}
 
-	public void setID_facture(int ID_facture) {
-		this.ID_facture = ID_facture;
+	public void setID_Liv(int ID_Liv) {
+		this.ID_Liv = ID_Liv;
 	}
 
-	public Date getdate() {
-		return date;
+	public String getparcours() {
+		return parcours;
 	}
 
-	public void setdate(Date date) {
-		this.date = date;
+	public void setparcours(String parcours) {
+		this.parcours = parcours;
 	}
 
 	
 
-	public int getID_Article() {
-		return ID_Article;
+	public int getID_Dep() {
+		return ID_Dep;
 	}
 
-	public void setID_Article(int ID_Article) {
-		this.ID_Article = ID_Article;
+	public void setID_Dep(int ID_Dep) {
+		this.ID_Dep = ID_Dep;
 	}
 
-	public int getID_Client() {
-		return ID_Client;
+	public int getCode() {
+		return Code;
 	}
 
-	public void setID_Client(int ID_Client) {
-		this.ID_Client = ID_Client;
+	public void setCode(int Code) {
+		this.Code = Code;
 	}
 
 	@Override
 	public String toString() {
 		return String
-				.format("facture [ID_facture=%s, date=%s, ID_Article=%s, ID_Client=%s]",
-						ID_facture, date, ID_Article,ID_Client );
+				.format("livreurs [ID_Dep=%s, parcours=%s, ID_Dep=%s, Code=%s]",
+						ID_Liv, parcours, ID_Dep,Code );
 	}
 	
 	/*public String toString() {

@@ -14,30 +14,30 @@ import Livraison.model.livreur;
 public class livreurDAO {
 
 	
-	private static String FIND_ALL_Facture = "SELECT * FROM facture";
-	private static String Select_Client_Facture  = "SELECT * FROM facture where ID_Client=?";
-	private static String CREATE_Facture = "INSERT INTO facture (date, ID_Article, ID_Client) VALUES (?,?,?)";
+	private static String FIND_ALL_livreurs = "SELECT * FROM livreurs";
+	private static String Select_journaux_livreurs  = "SELECT * FROM livreurs where ID_Liv=?";
+	private static String CREATE_livreur = "INSERT INTO livreurs (parcours, ID_Dep, Code) VALUES (?,?,?)";
 	
 	//private static String DRIVER = "com.mysql.jdbc.Driver";
 	private static String user = "root";
 	private static String password = "";
-	private static String BD_URL="jdbc:mysql://localhost/test2";
+	private static String BD_URL="jdbc:mysql://localhost/livraison";
 	
 	private Connection connection=null;
 	private PreparedStatement statement =null;
 	private ResultSet resultset=null;
 	
 	/*****************Ajouter une facture**********************/
-	public int CreateFacture(livreur facture) {
+	public int CreateLivreur(livreur livreur) {
 		int result=-1;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 				connection= (Connection) DriverManager.getConnection(BD_URL, user, password);
-				statement=(PreparedStatement) connection.prepareStatement(CREATE_Facture);
-				statement.setDate(1, facture.getdate());
-				statement.setInt(2, facture.getID_Article());
-				statement.setInt(3, facture.getID_Client());
+				statement=(PreparedStatement) connection.prepareStatement(CREATE_livreur);
+				statement.setString(1, livreur.getparcours());
+				statement.setInt(2, livreur.getID_Dep());
+				statement.setInt(3, livreur.getID_Liv());
 				result = statement.executeUpdate();
 				statement.close();
 				connection.close();
@@ -51,22 +51,22 @@ public class livreurDAO {
 		return result;
 	}
 		/************************Lister des Factures***********************/
-	public ArrayList<livreur> getAllfacture(){
-		ArrayList<livreur> facture = new ArrayList<Livraison.model.livreur>();
+	public ArrayList<livreur> getAllLivreurs(){
+		ArrayList<livreur> livreur = new ArrayList<Livraison.model.livreur>();
 	
 		try {
 				Class.forName("com.mysql.jdbc.Driver");
 				connection =(Connection) DriverManager.getConnection(BD_URL, user, password);
 			
-			statement =(PreparedStatement) connection.prepareStatement(FIND_ALL_Facture);
+			statement =(PreparedStatement) connection.prepareStatement(FIND_ALL_livreurs);
 			resultset = statement.executeQuery();
 			while (resultset.next()) {
-				int ID_facture = resultset.getInt("ID_facture");
-				Date date = resultset.getDate("date");
-				int ID_Client = resultset.getInt("ID_Client");
-				int ID_Article = resultset.getInt("ID_Article");
-				livreur factures = new livreur(ID_facture, date,ID_Article , ID_Client);
-				facture.add(factures);
+				int ID_Liv = resultset.getInt("ID_Liv");
+				String parcours = resultset.getString("parcours");
+				int ID_Dep = resultset.getInt("ID_Dep");
+				int Code = resultset.getInt("code");
+				livreur livreurs = new livreur(ID_Liv, parcours, ID_Dep, Code);
+				livreur.add(livreurs);
 			}
 			resultset.close();
 			statement.close();
@@ -78,28 +78,28 @@ public class livreurDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	return facture;
+	return livreur;
 	}
 	
 	/************************Selectionner les factures d'un client***********************/
-	public ArrayList<livreur> findByIdF_IdC(int ClientID){
-		ArrayList<livreur> factures = new ArrayList<livreur>();
+	public ArrayList<livreur> findByIdL_Code(int Codej){
+		ArrayList<livreur> livreur = new ArrayList<livreur>();
 		
 		
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				connection =(Connection) DriverManager.getConnection(BD_URL, user, password);
 			
-			statement =(PreparedStatement) connection.prepareStatement(Select_Client_Facture);
-			statement.setInt(1, ClientID);
+			statement =(PreparedStatement) connection.prepareStatement(Select_journaux_livreurs);
+			statement.setInt(1, Codej);
 			resultset = statement.executeQuery();
 			while (resultset.next()) {
-				int ID_facture = resultset.getInt("ID_facture");
-				Date date  = resultset.getDate("date");
-				int ID_Article = resultset.getInt("ID_Article");
-				int ID_Client = resultset.getInt("ID_Client");
-				livreur facture = new livreur(ID_facture, date , ID_Article, ID_Client);
-				factures.add(facture);
+				int ID_Liv = resultset.getInt("ID_Liv");
+				String parcours = resultset.getString("parcours");
+				int ID_Dep = resultset.getInt("ID_Dep");
+				int Code = resultset.getInt("code");
+				livreur livreurs = new livreur(ID_Liv, parcours, ID_Dep, Code);
+				livreur.add(livreurs);
 			}
 			resultset.close();
 			statement.close();
@@ -111,7 +111,7 @@ public class livreurDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	return factures;
+	return livreur;
 	}
 	
 	
@@ -131,14 +131,14 @@ public class livreurDAO {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		livreurDAO Fdao=livreurDAO.getInstance();
-		ArrayList<livreur> factures=Fdao.getAllfacture();
+		livreurDAO Ldao=livreurDAO.getInstance();
+		ArrayList<livreur> livreurs=Ldao.getAllLivreurs();
 		System.out.println("Liste des factures : \n");
-		System.out.println(factures);
+		System.out.println(livreurs);
 		
 		
 		System.out.println("Liste des articles : \n");
-			ArrayList<livreur>  cl=Fdao.findByIdF_IdC(1);
+			ArrayList<livreur>  cl=Ldao.findByIdL_Code(1);
 			System.out.println(cl);
 	}
 
